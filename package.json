@@ -1,0 +1,12 @@
+{
+  "name": "webx",
+  "description": "webx, motherfucker",
+  "private": true,
+  "version": "0.0.1",
+  "dependencies": {
+    "bower": "*"
+  },
+  "engines": {
+    "node": "0.12.x"
+  }
+}
