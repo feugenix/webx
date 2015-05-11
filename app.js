@@ -5,18 +5,28 @@ var http = require('http'),
 var port = process.env.PORT || 5000;
 
 http
-    .createServer(reqHandler)
+    .createServer(function(req, res) {
+        return reqHandler(req, res);
+    })
     .listen(port);
 
-
-var reqHandler = function(req, res) {
+var reqHandler = function(request, response) {
     http
-        .get('http://webx.mishanga.ru/', function(result) {
-            res.writeHead(200, {'Content-Type': 'text/plain'});
-            res.end(result);
+        .get('http://webx.mishanga.ru/', function(webxResponse) {
+            var data = '';
+            response.writeHead(200, {'Content-Type': 'text/plain'});
+
+            webxResponse.setEncoding('utf8');
+            webxResponse.on('data', function (chunk) {
+                data += chunk;
+            });
+
+            webxResponse.on('end', function() {
+                response.end(data);
+            });
         })
         .on('error', function() {
-            res.writeHead(500, {'Content-Type': 'text/plain'});
-            res.end('webx.mishanga.ru is down');
+            response.writeHead(500, {'Content-Type': 'text/plain'});
+            response.end('webx.mishanga.ru is down');
         });
 };
