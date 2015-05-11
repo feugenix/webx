@@ -4,12 +4,6 @@ var http = require('http'),
 
 var port = process.env.PORT || 5000;
 
-http
-    .createServer(function(req, res) {
-        return reqHandler(req, res);
-    })
-    .listen(port);
-
 var reqHandler = function(request, response) {
     http
         .get('http://webx.mishanga.ru/', function(webxResponse) {
@@ -30,3 +24,7 @@ var reqHandler = function(request, response) {
             response.end('webx.mishanga.ru is down');
         });
 };
+
+http
+    .createServer(reqHandler)
+    .listen(port);
