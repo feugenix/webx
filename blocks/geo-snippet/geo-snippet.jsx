@@ -6,10 +6,11 @@ var GeoSnippet = React.createClass({
     render: function() {
         var props = this.props,
             data = {
+                mod: '_type_geo',
                 title: props.title,
                 titleUrl: props.titleUrl,
-                snippetContent: props.text,
-                customContent: <div class="snippet__geo-info">{this.props.address}</div>
+                text: props.text,
+                customContent: <div className="snippet__geo-info">{this.props.address}</div>
             };
         return (
             <Snippet {...data} />

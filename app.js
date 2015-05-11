@@ -1,6 +1,6 @@
 var http = require('http'),
     JSX = require('node-jsx').install({ extension: '.jsx' }),
-    main = require('blocks/main/main.jsx');
+    main = require('./blocks/main/main.jsx');
 
 var port = process.env.PORT || 5000;
 
@@ -25,7 +25,7 @@ var reqHandler = function(request, response) {
                     return sendError('data isn\'t json');
                 }
 
-                response.writeHead(200, {'Content-Type': 'text/plain'});
+                response.writeHead(200, {'Content-Type': 'text/html'});
                 response.end(main(jsonData));
             });
         })

@@ -1,29 +1,19 @@
 var React = require('react'),
     JSX = require('node-jsx').install({ extension: '.jsx' }),
-    Snippet = require('../snippet/snippet.jsx'),
-    GeoSnippet = require('../geo-snippet/geo-snippet.jsx');
+    Page = require('../page/page.jsx');
 
 function main(data) {
-    var docs = data.docs,
-        snippets = '';
-
-    if (!docs || !docs.length)
-        return;
-
-    docs.forEach(function(doc) {
-        if (docs.address)
-            snippets.push({
-                type: 'geo',
-                doc: doc
-            });
-        else
-            snippets.push({
-                type: 'general',
-                doc: doc
-            })
-    });
-
-    return React.renderToString(<SerpList snippets={snippets} />);
+    return [
+        '<!DOCTYPE html><html><head><title>Webx</title>',
+        '<style>',
+        '.page { padding: 20px; padding-left: 120px; }',
+        '.snippet { margin-bottom: 25px; }',
+        '.snippet__geo-info { margin-top: 5px; }',
+        '.serp-list { width: 550px; }',
+        '</style></head>',
+        React.renderToString(<Page data={data} />),
+        '</html>'
+    ].join('');
 };
 
 module.exports = main;

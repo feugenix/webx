@@ -5,19 +5,19 @@ var React = require('react'),
 
 var SerpList = React.createClass({
     render: function() {
-        var snippets = this.props.snippets;
+        var snippets = this.props.snippets || [];
 
         return (
-            <div>
+            <div className="serp-list">
                 {
-                    snippets.map(function(snippet) {
+                    snippets.map(function(snippet, index) {
                         switch (snippet.type) {
                             case 'geo':
-                                return <GeoSnippet {...snippet.doc} />
+                                return <GeoSnippet {...snippet.doc} key={index} />
                             break;
 
                             default:
-                                return <Snippet {...snippet.doc} />
+                                return <Snippet {...snippet.doc} key={index} />
                         }
                     })
                 }
@@ -25,3 +25,5 @@ var SerpList = React.createClass({
         );
     }
 });
+
+module.exports = SerpList;
