@@ -4,8 +4,11 @@
   "private": true,
   "version": "0.0.1",
   "dependencies": {
-    "bower": "*"
+    "bower": "*",
+    "react": "~0.13.3",
+    "node-jsx": "~0.13.3"
   },
+  "main": "app.js",
   "engines": {
     "node": "0.12.x"
   }
